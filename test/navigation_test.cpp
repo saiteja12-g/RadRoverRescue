@@ -1,14 +1,15 @@
+#include <stdlib.h>
 #include <gtest/gtest.h>
 #include <rclcpp/executors.hpp>
 #include <rclcpp/node.hpp>
 #include <rclcpp/publisher.hpp>
-#include <stdlib.h>
 #include <rclcpp/rclcpp.hpp>
 
 #include "std_msgs/msg/string.hpp"
 
 #include "../include/Navigation.hpp"
 #include "nav_msgs/msg/odometry.hpp"
+
 using ODOM = nav_msgs::msg::Odometry;
 
 class TaskNavigation : public testing::Test {

@@ -1,7 +1,8 @@
+#include <tf2/LinearMath/Matrix3x3.h>
+
 #include <gtest/gtest.h>
 #include <stdlib.h>
 #include <rclcpp/rclcpp.hpp>
-#include <tf2/LinearMath/Matrix3x3.h>
 
 #include "std_msgs/msg/string.hpp"
 
