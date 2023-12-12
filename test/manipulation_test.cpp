@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "../include/Manipulation.hpp"
 
 #include <gtest/gtest.h>
 #include <stdlib.h>
@@ -20,6 +19,7 @@
 #include <rclcpp/rclcpp.hpp>
 
 #include "std_msgs/msg/string.hpp"
+#include "../include/Manipulation.hpp"
 
 class TaskManipulation : public testing::Test {
  public:

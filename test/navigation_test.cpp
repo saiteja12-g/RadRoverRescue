@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "../include/Navigation.hpp"
 
 #include <gtest/gtest.h>
 #include <stdlib.h>
@@ -24,6 +23,7 @@
 
 #include "nav_msgs/msg/odometry.hpp"
 #include "std_msgs/msg/string.hpp"
+#include "../include/Navigation.hpp"
 
 using ODOM = nav_msgs::msg::Odometry;
 
