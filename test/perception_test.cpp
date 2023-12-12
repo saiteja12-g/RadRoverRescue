@@ -41,8 +41,6 @@ TEST_F(TaskPerception, test_detect_bin) {
   odom_sub = percep_odom_node->create_subscription<ODOM>("odom", 10,
       std::bind(&TaskPerception::odom_callback_search, this, _1));
   node_ = rclcpp::Node::make_shared("test_publisher");
-  auto test_pub = node_->create_publisher<std_msgs::msg::String>
-                    ("perception", 10.0);
 
   auto num_pub = node_->count_publishers("perception");
   EXPECT_EQ(1, static_cast<int>(num_pub));
@@ -66,8 +64,6 @@ TEST_F(TaskPerception, test_move_bin) {
   odom_sub = percep_odom_node->create_subscription<ODOM>("odom", 10,
       std::bind(&TaskPerception::odom_callback_search, this, _1));
   node_ = rclcpp::Node::make_shared("test_publisher");
-  auto test_pub = node_->create_publisher<std_msgs::msg::String>
-                    ("perception", 10.0);
 
   auto num_pub = node_->count_publishers("perception");
   EXPECT_EQ(1, static_cast<int>(num_pub));

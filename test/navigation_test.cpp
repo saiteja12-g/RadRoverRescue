@@ -28,9 +28,6 @@ void TaskNavigation::callback() {
 TEST_F(TaskNavigation, test_search_bins) {
   node_ = rclcpp::Node::make_shared("test_navigation");
   Navigation nav;
-  // auto test_sub = node_->create_subscription<ODOM>("odom", 10, &callback);
-  auto test_pub = node_->create_publisher<ODOM>
-                    ("odom", 10.0);
   auto ypos = 3.0;
   TIMER timer = node_->create_wall_timer(100ms,
       std::bind(&TaskNavigation::callback, this));
@@ -51,10 +48,6 @@ TEST_F(TaskNavigation, test_search_bins) {
 TEST_F(TaskNavigation, test_resume_search) {
   node_ = rclcpp::Node::make_shared("test_navigation");
   Navigation nav;
-  // auto test_sub = node_->create_subscription<ODOM>("odom", 10, &callback);
-  auto test_pub = node_->create_publisher<ODOM>
-                    ("odom", 10.0);
-
   TIMER timer = node_->create_wall_timer(100ms,
       std::bind(&TaskNavigation::callback, this));
   rclcpp::spin_some(node_);
@@ -74,9 +67,6 @@ TEST_F(TaskNavigation, test_resume_search) {
 TEST_F(TaskNavigation, test_move_to_disposal) {
   node_ = rclcpp::Node::make_shared("test_navigation");
   Navigation nav;
-  // auto test_sub = node_->create_subscription<ODOM>("odom", 10, &callback);
-  auto test_pub = node_->create_publisher<ODOM>
-                    ("odom", 10.0);
   rclcpp::spin_some(node_);
   TIMER timer = node_->create_wall_timer(100ms,
       std::bind(&TaskNavigation::callback, this));

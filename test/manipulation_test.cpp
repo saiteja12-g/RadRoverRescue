@@ -27,9 +27,6 @@ TEST_F(TaskManipulation, test_pick_bin) {
   // Create the clients for picking and placing
   pick_client = node_->create_client<SERVICE_DELETE>("delete_entity");
   place_client = node_->create_client<SERVICE_SPAWN>("spawn_entity");
-  auto test_pub = node_->create_publisher<std_msgs::msg::String>
-                    ("manipulation", 10.0);
-
   auto num_pub = node_->count_publishers("manipulation");
   EXPECT_EQ(1, static_cast<int>(num_pub));
 }
@@ -46,7 +43,5 @@ TEST_F(TaskManipulation, test_place_bin) {
   // Create the clients for picking and placing
   pick_client = node_->create_client<SERVICE_DELETE>("delete_entity");
   place_client = node_->create_client<SERVICE_SPAWN>("spawn_entity");
-  auto test_pub = node_->create_publisher<std_msgs::msg::String>
-                    ("manipulation", 10.0);
   EXPECT_EQ(3.5, m_place_pose.position.x);
 }
