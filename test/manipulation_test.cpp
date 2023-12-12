@@ -20,6 +20,8 @@
 
 #include "std_msgs/msg/string.hpp"
 #include "../include/Manipulation.hpp"
+#include "std_msgs/msg/string.hpp"
+#include "std_msgs/msg/string.hpp"
 
 class TaskManipulation : public testing::Test {
  public:
