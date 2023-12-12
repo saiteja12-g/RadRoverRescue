@@ -1,36 +1,79 @@
-# This is a basic workflow to help you get started with Actions
+##############################################################################
+#
+# GitGub CI workflow syntax spec:
+#    https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
+#
+# CodeCov github action setup:
+#    https://github.com/codecov/codecov-action
+#
+# CodeCov badge setup:
+#    https://docs.codecov.com/docs/status-badges
+#
+# version 1.1
+##############################################################################
 
-name: CI
+name: Run Unit Test and Upload Coverage Report
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
+  # Triggered whenever push to main 
   push:
     branches: [ "main" ]
+
+  # Triggered whenever a pull request is created on main
   pull_request:
     branches: [ "main" ]
+    types: [opened]
 
-  # Allows you to run this workflow manually from the Actions tab
+  # Allow manual trigger
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+  build-run-upload:
+    # Create a container of the latest Ubuntu, other values could be
+    # ubuntu-latest, ubuntu-22.04, etc.
+    runs-on: ubuntu-22.04
+    
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      # We want to use GitHub CI checkout version 3 to check out our branch
       - uses: actions/checkout@v3
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      # Install OpenCV
+      - name: install opencv 
+        run: |   
+            sudo apt-get install libopencv-dev 
+            sudo apt-get install libopencv-contrib-dev
+      
+      # Install some system pacakges
+      - name: Install build packages
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          sudo apt update
+          sudo apt install -y software-properties-common
+          sudo apt install -y doxygen lcov gcovr
+          
+      # Build, run unit test, and generate coverage report
+      - name: Configure CMake flags and build exectables
+        run: |
+          cmake -D WANT_COVERAGE=ON -D CMAKE_BUILD_TYPE=Debug -S ./ -B build/
+          cmake --build build/ --clean-first --target all test_coverage
+          
+      
+
+      # # Compile and executables
+      # - name: Build Coverage
+      #   working-directory: ${{github.workspace}}/build
+      #   run: make
+
+      # # Run test suite and compute code coverage
+      # - name: Run Test Coverage
+      #   working-directory: ${{github.workspace}}/build
+      #   run: make code_coverage
+
+     
+      # Upload coverage result to CodeCov
+      - name: Upload coverage result to CodeCov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          files: ${{github.workspace}}/build/test_coverage.info
+          fail_ci_if_error: true # optional (default = false)
+          verbose: true # optional (default = false)   
