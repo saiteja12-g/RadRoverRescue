@@ -34,6 +34,27 @@ if(COVERAGE)
 endif()
 
 
+if(BUILD_TESTING)
+  find_package(ament_cmake_gtest REQUIRED)
+  set(TESTFILES
+  test/main.cpp
+  test/manipulation_test.cpp
+  test/navigation_test.cpp
+  test/perception_test.cpp
+)
+  ament_add_gtest(test_${PROJECT_NAME} ${TESTFILES} include/Manipulation.hpp include/Navigation.hpp include/Perception.hpp)
+  target_include_directories(test_${PROJECT_NAME} PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>
+  )
+  ament_target_dependencies(test_${PROJECT_NAME} rclcpp rclcpp_action std_msgs geometry_msgs sensor_msgs image_transport cv_bridge OpenCV nav_msgs gazebo_msgs tf2 tf2_ros)
+  install(TARGETS
+    test_${PROJECT_NAME}
+    DESTINATION lib/${PROJECT_NAME}  
+  )
+  target_include_directories(test_${PROJECT_NAME} PUBLIC ../include/mario_com)
+endif()
+
 # create targets for building code coverage reports
 if(COVERAGE)
   # unit test coverage:
@@ -59,7 +80,7 @@ if(COVERAGE)
     NAME app_coverage          # target name
     EXECUTABLE human-detector-tracker       # what to run insdie the build directory?
     EXCLUDE
-    "test/test.cpp"    # App does not run unit test, so don't analyze it
+    "test/main.cpp"    # App does not run unit test, so don't analyze it
     "test/manipulation_test.cpp"    # App does not run unit test, so don't analyze it
     "test/navigation_test.cpp"    # App does not run unit test, so don't analyze it
     "test/perception_test.cpp"    # App does not run unit test, so don't analyze it
@@ -67,26 +88,16 @@ if(COVERAGE)
     # "/usr/local/include/opencv4/opencv2/flann"
     )
 
-if(BUILD_TESTING)
-  find_package(ament_cmake_gtest REQUIRED)
-  set(TESTFILES
-  test/main.cpp
-  test/manipulation_test.cpp
-  test/navigation_test.cpp
-  test/perception_test.cpp
-)
-  ament_add_gtest(test_${PROJECT_NAME} ${TESTFILES} include/Manipulation.hpp include/Navigation.hpp include/Perception.hpp)
-  target_include_directories(test_${PROJECT_NAME} PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:include>
-  )
-  ament_target_dependencies(test_${PROJECT_NAME} rclcpp rclcpp_action std_msgs geometry_msgs sensor_msgs image_transport cv_bridge OpenCV nav_msgs gazebo_msgs tf2 tf2_ros)
-  install(TARGETS
-    test_${PROJECT_NAME}
-    DESTINATION lib/${PROJECT_NAME}  
-  )
-  target_include_directories(test_${PROJECT_NAME} PUBLIC ../include/mario_com)
-endif()
+###################################
+# Specify Targets
+###################################
+# create a target to build documentation
+# doxygen_add_docs(docs           # target name
+#   # List of files or directories
+#   ${PROJECT_SOURCE_DIR}/src
+#   ${PROJECT_SOURCE_DIR}/include
+#   ${PROJECT_SOURCE_DIR}/test
+#   )
 
 ###################################################
 # Create the compilation database for clangd and move it out of the build dir.
@@ -123,14 +134,5 @@ endif()
 #   message( FATAL_ERROR "Doxygen needs to be installed to generate the doxygen documentation" )
 # endif()
 
-###################################
-# Specify Targets
-###################################
-# create a target to build documentation
-# doxygen_add_docs(docs           # target name
-#   # List of files or directories
-#   ${PROJECT_SOURCE_DIR}/src
-#   ${PROJECT_SOURCE_DIR}/include
-#   ${PROJECT_SOURCE_DIR}/test
-#   )
+
 ament_package()
