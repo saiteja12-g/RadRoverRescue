@@ -83,15 +83,15 @@ jobs:
           
       
 
-      # # Compile and executables
-      # - name: Build Coverage
-      #   working-directory: ${{github.workspace}}/build
-      #   run: make
+      # Compile and executables
+      - name: Build Coverage
+        working-directory: ${{github.workspace}}/build
+        run: make
 
-      # # Run test suite and compute code coverage
-      # - name: Run Test Coverage
-      #   working-directory: ${{github.workspace}}/build
-      #   run: make code_coverage
+      # Run test suite and compute code coverage
+      - name: Run Test Coverage
+        working-directory: ${{github.workspace}}/build
+        run: make code_coverage
 
      
       # Upload coverage result to CodeCov
