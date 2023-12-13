@@ -94,7 +94,8 @@ jobs:
           git update-index --chmod=+x do-docs.bash
           ./do-tests.bash
           ./do-docs.bash        
-
+          git config --global --add safe.directory /__w/RadRoverRescue/RadRoverRescue
+          
       # # Compile and executables
       # - name: Build Coverage
       #   working-directory: ${{github.workspace}}/build
