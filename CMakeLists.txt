@@ -33,6 +33,40 @@ if(COVERAGE)
   set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE "ON")
 endif()
 
+
+# create targets for building code coverage reports
+if(COVERAGE)
+  # unit test coverage:
+  setup_target_for_coverage_lcov ( # use lcov to generate coverage report
+    NAME test_coverage          # target name
+    # EXECUTABLE ctest || true    # what to run insdie the build directory?
+    #                             #   '|| true' --> continue coverage even if ctest failed
+    EXECUTABLE ctest     # what to run insdie the build directory?
+    EXCLUDE
+      # "app/main.cpp"     # Unit test does not run app, so don't analyze it
+      # "app/post_process.cpp"     # Unit test does not run app, so don't analyze it
+      "*gtest*"          # Don't analyze googleTest code
+      "include/Manipulation.hpp"
+      "include/Navigation.hpp"
+      "include/Perception.hpp"
+      "include/RRR.hpp"
+      "/usr/include/*"   # Don't analyze system headers
+    )
+
+  # code coverage for the app (shell-app):
+  # Use gcovr insetad of lcov if you want to see branch coverage as well
+  setup_target_for_coverage_gcovr_html ( # use gcovr to generate coverage report
+    NAME app_coverage          # target name
+    EXECUTABLE human-detector-tracker       # what to run insdie the build directory?
+    EXCLUDE
+    "test/test.cpp"    # App does not run unit test, so don't analyze it
+    "test/manipulation_test.cpp"    # App does not run unit test, so don't analyze it
+    "test/navigation_test.cpp"    # App does not run unit test, so don't analyze it
+    "test/perception_test.cpp"    # App does not run unit test, so don't analyze it
+    # "/usr/local/include/opencv4/opencv2/core"
+    # "/usr/local/include/opencv4/opencv2/flann"
+    )
+
 if(BUILD_TESTING)
   find_package(ament_cmake_gtest REQUIRED)
   set(TESTFILES
