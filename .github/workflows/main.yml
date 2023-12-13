@@ -42,15 +42,16 @@ jobs:
       - uses: actions/checkout@v3
 
       # Install OpenCV
-      - name: install opencv 
+      - name: Install opencv 
         run: |   
             sudo apt-get install libopencv-dev 
             sudo apt-get install libopencv-contrib-dev
       - name: Install ROS Humble Packages
         run: |
           sudo apt update
-          sudo apt install ros-humble-desktop python3-argcomplete
-          sudo apt install ros-dev-tools
+          sudo apt install -y ros-humble-desktop python3-argcomplete
+          sudo apt install -y ros-dev-tools
+          source /opt/ros/humble/setup.bash
       # Install some system pacakges
       - name: Install build packages
         run: |
@@ -59,18 +60,19 @@ jobs:
           sudo apt install -y doxygen lcov gcovr
       - name: CV Bridge
         run: |
-          sudo apt-get install ros-foxy-cv-bridge
-          sudo apt-get install ros-foxy-vision-opencv
+          sudo apt-get install -y ros-humble-cv-bridge
+          sudo apt-get install -y ros-humble-vision-opencv
+          source /opt/ros/humble/setup.bash
       - name: ROS Dep
         run: |
           sudo rosdep init
           rosdep update
-          rosdep install --from-paths mario_com/src -y --ignore-src
+          rosdep install --from-paths RarRoverRescue/src -y --ignore-src
       
       # Install Gazebo ROS and other dependencies
       - name: CMake Dependencies for the package
         run: |
-          sudo apt install ros-humble-gazebo-ros-pkgs
+          sudo apt install -y ros-humble-gazebo-ros-pkgs
       # Build, run unit test, and generate coverage report
       - name: Configure CMake flags and build exectables
         run: |
