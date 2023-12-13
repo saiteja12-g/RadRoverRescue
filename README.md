@@ -55,7 +55,7 @@ git clone https://github.com/akasparm/RadRoverRescue.git
   ```
   cd ~/ros2_ws
   source install/setup.bash
-  colcon test --event-handlers console_direct+ --packages-select cpp_pubsub
+  colcon test --event-handlers console_direct+ --packages-select RadRoverRescue
   ```
 
 ## Links
