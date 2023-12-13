@@ -90,8 +90,8 @@ jobs:
       # Run all unit test, integration test, and generate combined coverage report
       - name: Build, run unit test, and generate coverage report
         run: |
-          ./do-tests.bash
-          ./do-docs.bash        
+          sudo ./do-tests.bash
+          sudo ./do-docs.bash        
 
       # # Compile and executables
       # - name: Build Coverage
