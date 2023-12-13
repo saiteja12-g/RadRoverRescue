@@ -63,11 +63,11 @@ jobs:
           sudo apt-get install -y ros-humble-cv-bridge
           sudo apt-get install -y ros-humble-vision-opencv
           source /opt/ros/humble/setup.bash
-      - name: ROS Dep
-        run: |
-          sudo rosdep init
-          rosdep update
-          rosdep install --from-paths RarRoverRescue/src -y --ignore-src
+      # - name: ROS Dep
+      #   run: |
+      #     sudo rosdep init
+      #     rosdep update
+      #     rosdep install --from-paths RarRoverRescue/src -y --ignore-src
       
       # Install Gazebo ROS and other dependencies
       - name: CMake Dependencies for the package
