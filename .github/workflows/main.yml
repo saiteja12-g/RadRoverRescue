@@ -79,9 +79,19 @@ jobs:
           source /opt/ros/humble/setup.bash
           # colcon build --cmake-args -DCOVERAGE=1 --packages-select RadRoverRescue
           cmake -D COVERAGE=ON -D CMAKE_BUILD_TYPE=Debug -S ./ -B build/
-          cmake --build build/ --clean-first --target all test_coverage
-          
-      
+          # cmake --build build/ --clean-first --target all test_coverage
+
+      # Install some system pacakges
+      - name: Install build packages
+        run: |
+          sudo apt update
+          sudo apt install -y doxygen lcov gcovr pandoc
+
+      # Run all unit test, integration test, and generate combined coverage report
+      - name: Build, run unit test, and generate coverage report
+        run: |
+          ./do-tests.bash
+          ./do-docs.bash        
 
       # # Compile and executables
       # - name: Build Coverage
