@@ -93,8 +93,7 @@ jobs:
           git update-index --chmod=+x do-tests.bash
           git update-index --chmod=+x do-docs.bash
           ./do-tests.bash
-          ./do-docs.bash    
-        call:    
+          ./do-docs.bash     
           git config --global --add safe.directory /__w/RadRoverRescue/RadRoverRescue
 
       # # Compile and executables
