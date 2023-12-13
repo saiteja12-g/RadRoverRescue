@@ -62,10 +62,10 @@ git clone https://github.com/akasparm/RadRoverRescue.git
 
 |Item|Link|
 |---|:---:|
-|Project Proposal Document|[here](/Proposal/Project_Proposal.pdf)|
-|Quad Chart|[here](/Proposal/quad%20chart.pdf)|
-|UML Diagram|[here](/UML/revised/Revised%20UML_diagram.pdf)|
-|Flow Chart|[here](/Proposal/Flowchart.pdf)|
-|AIP Sheet|[here](https://docs.google.com/spreadsheets/u/0/d/1XzHJKPvlp2NBZCuSRj7cfIvq3t03doPlDkwKnDLFQbU/edit?pli=1#gid=1967651968)|
+|Project Proposal Document|[here](Proposal/Final_Project_Proposal.pdf)|
+|Quad Chart|[here](/Proposal/quad_chart.pdf)|
+|UML Diagram|[here](UML/Initial/UML%20class.pdf)|
+|Flow Chart|[here](Proposal/Activity%20Diagram.pdf)|
+|AIP Sheet|[here](https://docs.google.com/spreadsheets/d/1OnBxuGl_Tpoor3TaXmInb9mH6GXF_YEadl3Yi5uaojI/edit?usp=sharing)|
 |Week-1 Sprint|[here](https://docs.google.com/document/d/1_zHlnaphnwkMOBOH4WXWq80tkCj9v3kwDQVp3Jc9LKU/edit)|
-|Videos|[here](https://drive.google.com/drive/folders/1_GK_JMNFahxSQeobAj8jg4wJFANAf9b8?usp=sharing)|
+|Videos|[here](https://drive.google.com/drive/folders/1f7CGtQDr-Okn4R803u6pNvuJnW37Ajma?usp=sharing)|
