@@ -52,7 +52,6 @@ if(BUILD_TESTING)
     DESTINATION lib/${PROJECT_NAME}  
   )
   target_include_directories(test_${PROJECT_NAME} PUBLIC ../include/mario_com)
-  ament_lint_auto_find_test_dependencies()
 endif()
 
 ###################################################
