@@ -90,9 +90,9 @@ jobs:
       # Run all unit test, integration test, and generate combined coverage report
       - name: Build, run unit test, and generate coverage report
         run: |
-          git update-index --chmod=+x do-tests.bash
-          git update-index --chmod=+x do-docs.bash
-          git config --system --add safe.directory /__w/RadRoverRescue/RadRoverRescue
+          # git update-index --chmod=+x do-tests.bash
+          # git update-index --chmod=+x do-docs.bash
+          # git config --system --add safe.directory /__w/RadRoverRescue/RadRoverRescue
           ./do-tests.bash
           ./do-docs.bash     
 
