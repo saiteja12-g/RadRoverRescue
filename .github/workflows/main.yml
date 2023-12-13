@@ -90,8 +90,10 @@ jobs:
       # Run all unit test, integration test, and generate combined coverage report
       - name: Build, run unit test, and generate coverage report
         run: |
-          sudo ./do-tests.bash
-          sudo ./do-docs.bash        
+          git update-index --chmod=+x do-tests.bash
+          git update-index --chmod=+x do-docs.bash
+          ./do-tests.bash
+          ./do-docs.bash        
 
       # # Compile and executables
       # - name: Build Coverage
