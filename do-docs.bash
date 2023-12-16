@@ -28,7 +28,7 @@ colcon build \
        --packages-select RadRoverRescue \
        --cmake-target "docs"
 # echo "open src/RadRoverRescue/docs/html/index.html"
-open src/RadRoverRescue/docs/html/index.html
+# open src/RadRoverRescue/docs/html/index.html
 
 ###############################
 # 3. combine all docs
