@@ -35,5 +35,5 @@ open src/RadRoverRescue/docs/html/index.html
 ###############################
 DOCS_DIR=src/docs/
 pandoc -f markdown $DOCS_DIR/index.md > $DOCS_DIR/index.html
-open $DOCS_DIR/index.html || true
+# open $DOCS_DIR/index.html || true
 

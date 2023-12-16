@@ -34,6 +34,6 @@ colcon test-result --test-result-base build/RadRoverRescue
 # 4. show the combined coverage report
 ##############################
 ros2 run RadRoverRescue generate_coverage_report.bash
-open build/RadRoverRescue/test_coverage/index.html
+# open build/RadRoverRescue/test_coverage/index.html
 
 # open $test_coverage/index.html || true
