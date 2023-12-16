@@ -21,25 +21,17 @@ source /opt/ros/humble/setup.bash
 set -u                          # re-enable undefined variable check
 
 ###############################
-# 2. run my_model's "docs" target
+# 2. run RadRoverRescue's "docs" target
 ###############################
 colcon build \
        --event-handlers console_cohesion+ \
-       --packages-select my_model \
+       --packages-select RadRoverRescue \
        --cmake-target "docs"
-##echo "open src/my_model/docs/html/index.html"
+# echo "open src/RadRoverRescue/docs/html/index.html"
+open src/RadRoverRescue/docs/html/index.html
 
 ###############################
-# 3. run my_controller's "docs" target
-###############################
-colcon build \
-       --event-handlers console_cohesion+ \
-       --packages-select my_controller \
-       --cmake-target "docs"
-##echo "open src/my_controller/docs/html/index.html"
-
-###############################
-# 4. combine all docs
+# 3. combine all docs
 ###############################
 DOCS_DIR=src/docs/
 pandoc -f markdown $DOCS_DIR/index.md > $DOCS_DIR/index.html
