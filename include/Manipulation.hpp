@@ -37,16 +37,33 @@ using namespace std::chrono_literals;  // Allows the use of time literals (e.g.,
 using std::placeholders::_1;  // For use in std::bind, to refer to the first
                               // argument of a bound function
 
-
+/**
+ * @brief Defination of the Manipulation class
+ * 
+ */
 class Manipulation : public rclcpp::Node {
  public:
+   /**
+    * @brief Construct a new Manipulation object
+    * 
+    */
+   Manipulation();
 
-    Manipulation();
+   /**
+    * @brief Pick the object
+    * 
+    * @return true 
+    * @return false 
+    */
+   bool pick_obj();
 
-
-    bool pick_obj();
-
-    bool place_obj();
+   /**
+    * @brief Place the object
+    * 
+    * @return true 
+    * @return false 
+    */
+   bool place_obj();
 
 
  private:

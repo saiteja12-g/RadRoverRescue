@@ -1,3 +1,14 @@
+/**
+ * @file Perception.cpp
+ * @author Sai Teja Gilukara (Driver)
+ * @author Akash Parmar (Navigator)
+ * @brief 
+ * @version 0.1
+ * @date 2023-12-19
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
 #include "../include/Perception.hpp"
 #include <functional>
 #include <opencv2/core/types.hpp>
@@ -7,7 +18,10 @@
 #include "../include/Navigation.hpp"
 #include "tf2/LinearMath/Quaternion.h"
 #include "tf2/LinearMath/Matrix3x3.h"
-
+/**
+ * @brief Construct a new Perception:: Perception object
+ * 
+ */
 Perception::Perception() : Node("perception") {
     img_node = rclcpp::Node::make_shared("image_listener", options);
     pub_vel = this->create_publisher<TWIST>("cmd_vel", 10);
@@ -15,7 +29,11 @@ Perception::Perception() : Node("perception") {
     odom_sub = percep_odom_node->create_subscription<ODOM>("odom", 10,
         std::bind(&Perception::odom_callback_search, this, _1));
 }
-
+/**
+ * @brief image_callback function
+ * 
+ * @param msg 
+ */
 void Perception::img_callback(const
             sensor_msgs::msg::Image::ConstSharedPtr& msg) {
     try {
@@ -82,7 +100,11 @@ void Perception::img_callback(const
             "Could not convert from '%s' to 'bgr8'.", msg->encoding.c_str());
     }
 }
-
+/**
+ * @brief odom callback function
+ * 
+ * @param msg 
+ */
 void Perception::odom_callback_search(const ODOM::SharedPtr msg) {
     tf2::Quaternion q(
         msg->pose.pose.orientation.x,
@@ -94,7 +116,12 @@ void Perception::odom_callback_search(const ODOM::SharedPtr msg) {
     m.getRPY(r, p, y);
     present_yaw = y;
 }
-
+/**
+ * @brief perception searching function
+ * 
+ * @return true 
+ * @return false 
+ */
 bool Perception::detect_obj() {
     RCLCPP_INFO(this->get_logger(), "Searching for radioactive waste");
     rclcpp::spin_some(percep_odom_node);
@@ -126,7 +153,12 @@ bool Perception::detect_obj() {
     return true;
 }
 
-
+/**
+ * @brief move towards object
+ * 
+ * @return true 
+ * @return false 
+ */
 bool Perception::move_to_obj() {
     auto vel = TWIST();
     if (r_rotate_flag) {

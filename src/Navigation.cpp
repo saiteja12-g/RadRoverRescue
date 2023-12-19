@@ -1,31 +1,57 @@
+/**
+ * @file Navigation.cpp
+ * @author Sai Teja Gilukara (Driver)
+ * @author Akash Parmar (Navigator)
+ * @brief 
+ * @version 0.1
+ * @date 2023-12-19
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
 #include "../include/Navigation.hpp"
 #include <cmath>
 #include <rclcpp/logger.hpp>
 #include <rclcpp/logging.hpp>
 #include <rclcpp/utilities.hpp>
 
-
+/**
+ * @brief search for the closest waypoint
+ * 
+ * @param msg 
+ */
 void Navigation::search(const ODOM::SharedPtr msg) {
     if ((std::abs(static_cast<int>(msg->pose.pose.position.y - req_pos_y))
         == 0) && (std::abs(static_cast<int>(msg->pose.pose.position.x)) == 0)) {
             check_odom = true;
     }
 }
-
+/**
+ * @brief disposal of trash
+ * 
+ * @param msg 
+ */
 void Navigation::disposal(const ODOM::SharedPtr msg) {
     if ((std::abs(static_cast<int>(msg->pose.pose.position.x - 3)) == 0)
         && (std::abs(static_cast<int>(msg->pose.pose.position.y + 2.5)) == 0)) {
             check_odom = true;
     }
 }
-
+/**
+ * @brief Resuming search
+ * 
+ * @param msg 
+ */
 void Navigation::resume(const ODOM::SharedPtr msg) {
     if ((std::abs(static_cast<int>(msg->pose.pose.position.x)) == 0)
         && (std::abs(static_cast<int>(msg->pose.pose.position.y)) == 0)) {
             check_odom = true;
     }
 }
-
+/**
+ * @brief Construct a new Navigation:: Navigation object
+ * 
+ */
 Navigation::Navigation() : Node("navigation") {
     node_odom_nav = rclcpp::Node::
                     make_shared("odom_node");
@@ -33,7 +59,12 @@ Navigation::Navigation() : Node("navigation") {
     check_odom = false;
     req_pos_y = 0.0;
 }
-
+/**
+ * @brief Searching for object (path)
+ * 
+ * @return true 
+ * @return false 
+ */
 bool Navigation::search_obj() {
     rclcpp::sleep_for(1000ms);
     std::vector<float_t> search_pos = {6.0, 4.0, 2.0, 0.0};
@@ -65,7 +96,12 @@ bool Navigation::search_obj() {
     }
     return true;
 }
-
+/**
+ * @brief move to disposal zone
+ * 
+ * @return true 
+ * @return false 
+ */
 bool Navigation::move_to_disposal_zone() {
     RCLCPP_INFO(this->get_logger(), "Picked up waste, Moving towards track bin");
     check_odom = false;
@@ -88,7 +124,12 @@ bool Navigation::move_to_disposal_zone() {
     }
     return true;
 }
-
+/**
+ * @brief resuming search
+ * 
+ * @return true 
+ * @return false 
+ */
 bool Navigation::resume_search() {
     RCLCPP_INFO(this->get_logger(), "Towards home position");
     check_odom = false;

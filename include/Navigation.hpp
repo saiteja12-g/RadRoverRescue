@@ -32,23 +32,61 @@ using std::chrono::duration;  // For representing time durations
 using std::placeholders::_1;  // Used for binding arguments in callbacks
 using namespace std::chrono_literals;  // Allows using time literals like '10s'
 
-// Definition of the Navigation class
+/**
+ * @brief Definition of the Navigation class
+ * 
+ */
 class Navigation : public rclcpp::Node {
  public:
+   /**
+    * @brief Construct a new Navigation object
+    * 
+    */
+   Navigation();
+   /**
+    * @brief Searching for object
+    * 
+    * @return true 
+    * @return false 
+    */
+   bool search_obj();
 
-    Navigation();
+   /**
+    * @brief move to disposal zone
+    * 
+    * @return true 
+    * @return false
+    */
+   bool move_to_disposal_zone(); 
 
-    bool search_obj();
+   /**
+    * @brief Start searching again
+    * 
+    * @return true 
+    * @return false 
+    */
+   bool resume_search();
+   
+   /**
+    * @brief search for object
+    * 
+    * @param msg 
+    */
+   void search(const ODOM::SharedPtr msg);
 
-    bool move_to_disposal_zone();
+   /**
+    * @brief Navigation callback function
+    * 
+    * @param msg 
+    */
+   void disposal(const ODOM::SharedPtr msg);
 
-    bool resume_search();
-
-    void search(const ODOM::SharedPtr msg);
-
-    void disposal(const ODOM::SharedPtr msg);
- 
-    void resume(const ODOM::SharedPtr msg);
+   /**
+    * @brief Navigation resume callback function
+    * 
+    * @param msg 
+    */
+   void resume(const ODOM::SharedPtr msg);
 
  private:
     PUBLISHER nav_publisher_;
