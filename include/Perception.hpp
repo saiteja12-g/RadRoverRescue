@@ -40,21 +40,47 @@ using std::placeholders::_1;  // Used for binding arguments in callbacks
 using namespace std::chrono_literals;  // Allows using time literals like '10s'
 using ODOM = nav_msgs::msg::Odometry;
 
-// Definition of the Perception class
+/**
+ * @brief Definition of the Perception class
+ *
+ */
 class Perception : public rclcpp::Node {
  public:
+  /**
+   * @brief Construct a new Perception object
+   *
+   */
   Perception();
   // Constructor for the class
-
+  /**
+   * @brief Method to detect objects
+   *
+   * @return true
+   * @return false
+   */
   bool detect_obj();
-  // Method to detect objects - returns true if successful
 
-  bool select_obj();
-  // Method to select an object based on some criteria - returns true if
-  // successful
+  /**
+   * @brief move to object
+   *
+   * @return true
+   * @return false
+   */
+  bool move_to_obj();
 
-  void move_to_obj();
-  // Method to initiate movement towards the selected object
+  /**
+   * @brief img callback function
+   *
+   * @param msg
+   */
+  void img_callback(const sensor_msgs::msg::Image::ConstSharedPtr& msg);
+
+  /**
+   * @brief odom callback function
+   *
+   * @param msg
+   */
+  void odom_callback_search(const ODOM::SharedPtr msg);
 
  private:
   cv::Mat img_feed;
@@ -62,4 +88,18 @@ class Perception : public rclcpp::Node {
 
   sensor_msgs::msg::LaserScan lidar_feed;
   // Laser scan data, typically from a LiDAR sensor
+
+  rclcpp::NodeOptions options;
+  image_transport::Subscriber sub;
+  rclcpp::Node::SharedPtr img_node;
+  rclcpp::Publisher<TWIST>::SharedPtr pub_vel;
+  rclcpp::Node::SharedPtr percep_odom_node;
+  rclcpp::Subscription<ODOM>::SharedPtr odom_sub;
+  bool r_rotate_flag;
+  bool l_rotate_flag;
+  bool move_forward;
+  bool stop_flag;
+  bool next_location;
+  double present_yaw;
+  double initial_yaw;
 };

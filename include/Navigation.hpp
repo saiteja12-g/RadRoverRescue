@@ -32,26 +32,66 @@ using std::chrono::duration;  // For representing time durations
 using std::placeholders::_1;  // Used for binding arguments in callbacks
 using namespace std::chrono_literals;  // Allows using time literals like '10s'
 
-// Definition of the Navigation class
+/**
+ * @brief Definition of the Navigation class
+ *
+ */
 class Navigation : public rclcpp::Node {
  public:
+  /**
+   * @brief Construct a new Navigation object
+   *
+   */
   Navigation();
-  // Constructor for the class
-
+  /**
+   * @brief Searching for object
+   *
+   * @return true
+   * @return false
+   */
   bool search_obj();
-  // Method to search for an object - returns true if successful
 
+  /**
+   * @brief move to disposal zone
+   *
+   * @return true
+   * @return false
+   */
   bool move_to_disposal_zone();
-  // Method to move the robot to a disposal zone - returns true if successful
 
+  /**
+   * @brief Start searching again
+   *
+   * @return true
+   * @return false
+   */
   bool resume_search();
-  // Method to resume searching after an interruption - returns true if
-  // successful
+
+  /**
+   * @brief search for object
+   *
+   * @param msg
+   */
+  void search(const ODOM::SharedPtr msg);
+
+  /**
+   * @brief Navigation callback function
+   *
+   * @param msg
+   */
+  void disposal(const ODOM::SharedPtr msg);
+
+  /**
+   * @brief Navigation resume callback function
+   *
+   * @param msg
+   */
+  void resume(const ODOM::SharedPtr msg);
 
  private:
-  geometry_msgs::msg::Pose current_pose;
-  // Current pose of the robot
-
-  geometry_msgs::msg::Pose next_pose;
-  // Next target pose for the robot
+  PUBLISHER nav_publisher_;
+  TIMER timer_;
+  std::shared_ptr<rclcpp::Node> node_odom_nav;
+  bool check_odom;
+  float_t req_pos_y;
 };

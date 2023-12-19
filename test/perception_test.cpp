@@ -12,7 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
+/**
+ * @file perception_test.cpp
+ * @author Sai Teja Gilukara (Navigator)
+ * @author Akash Parmar (Driver)
+ * @brief Perception test cases
+ * @version 0.1
+ * @date 2023-12-19
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
 #include <gtest/gtest.h>
 #include <stdlib.h>
 #include <tf2/LinearMath/Matrix3x3.h>
@@ -21,7 +31,10 @@
 
 #include "std_msgs/msg/string.hpp"
 #include "../include/Perception.hpp"
-
+/**
+ * @brief perception test class
+ * 
+ */
 class TaskPerception : public testing::Test {
  public:
   rclcpp::Node::SharedPtr node_;
@@ -40,13 +53,25 @@ class TaskPerception : public testing::Test {
   bool next_location;
   double present_yaw;
   double initial_yaw;
+  /**
+   * @brief odom callback function
+   * 
+   * @param msg 
+   */
   void odom_callback_search(const ODOM::SharedPtr msg);
 };
-
+/**
+ * @brief odom callback search function
+ * 
+ * @param msg 
+ */
 void TaskPerception::odom_callback_search(const ODOM::SharedPtr msg) {
   present_yaw = msg->pose.pose.orientation.y;
 }
-
+/**
+ * @brief Construct a new test f object
+ * 
+ */
 TEST_F(TaskPerception, test_detect_bin) {
   img_node = rclcpp::Node::make_shared("image_listener", options);
   m_pub_vel = img_node->create_publisher<TWIST>("cmd_vel", 10);
@@ -69,7 +94,10 @@ TEST_F(TaskPerception, test_detect_bin) {
   image_transport::ImageTransport it(img_node);
   EXPECT_FALSE(r_rotate_flag);
 }
-
+/**
+ * @brief Construct a new test f object
+ * 
+ */
 TEST_F(TaskPerception, test_move_bin) {
   img_node = rclcpp::Node::make_shared("image_listener", options);
   m_pub_vel = img_node->create_publisher<TWIST>("cmd_vel", 10);

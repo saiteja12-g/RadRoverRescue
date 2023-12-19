@@ -37,28 +37,38 @@ using namespace std::chrono_literals;  // Allows the use of time literals (e.g.,
 using std::placeholders::_1;  // For use in std::bind, to refer to the first
                               // argument of a bound function
 
-// Definition of the Manipulation class
+/**
+ * @brief Defination of the Manipulation class
+ *
+ */
 class Manipulation : public rclcpp::Node {
  public:
+  /**
+   * @brief Construct a new Manipulation object
+   *
+   */
   Manipulation();
-  // Constructor for the class
 
+  /**
+   * @brief Pick the object
+   *
+   * @return true
+   * @return false
+   */
   bool pick_obj();
-  // Method to pick an object - returns true if successful
 
+  /**
+   * @brief Place the object
+   *
+   * @return true
+   * @return false
+   */
   bool place_obj();
-  // Method to place an object - returns true if successful
-
-  void gripper_open();
-  // Method to open the gripper
-
-  void gripper_close();
-  // Method to close the gripper
 
  private:
+  geometry_msgs::msg::Pose m_place_pose;
   geometry_msgs::msg::Pose pick_pose;
-  // Pose for picking the object
-
-  geometry_msgs::msg::Pose place_pose;
-  // Pose for placing the object
+  CLIENT_DELETE pick_client;
+  CLIENT_SPAWN place_client;
+  rclcpp::Node::SharedPtr manip_node;
 };
