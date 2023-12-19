@@ -3,7 +3,7 @@ RadioactiveRoverRescue - A Robot to pick up radioactive waste
 
 ## ENPM 808X Final Project
 ![CICD Workflow status](https://github.com/akasparm/RadRoverRescue/actions/workflows/run-unit-test-and-upload-codecov.yml/badge.svg)
-[![codecov](https://codecov.io/gh/akasparm/RadRoverRescue/branch/development/graph/badge.svg)](https://codecov.io/gh/akasparm/RadRoverRescue)
+[![codecov](https://codecov.io/gh/saiteja12-g/RadRoverRescue/branch/development/graph/badge.svg)](https://codecov.io/gh/saiteja12-g/RadRoverRescue)
 [![License](https://img.shields.io/badge/license-Apache_2.0-blue.svg)](LICENSE)
 
 ## Student Details
