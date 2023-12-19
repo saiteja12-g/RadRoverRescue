@@ -35,23 +35,25 @@ using namespace std::chrono_literals;  // Allows using time literals like '10s'
 // Definition of the Navigation class
 class Navigation : public rclcpp::Node {
  public:
-  Navigation();
-  // Constructor for the class
 
-  bool search_obj();
-  // Method to search for an object - returns true if successful
+    Navigation();
 
-  bool move_to_disposal_zone();
-  // Method to move the robot to a disposal zone - returns true if successful
+    bool search_obj();
 
-  bool resume_search();
-  // Method to resume searching after an interruption - returns true if
-  // successful
+    bool move_to_disposal_zone();
+
+    bool resume_search();
+
+    void search(const ODOM::SharedPtr msg);
+
+    void disposal(const ODOM::SharedPtr msg);
+ 
+    void resume(const ODOM::SharedPtr msg);
 
  private:
-  geometry_msgs::msg::Pose current_pose;
-  // Current pose of the robot
-
-  geometry_msgs::msg::Pose next_pose;
-  // Next target pose for the robot
+    PUBLISHER nav_publisher_;
+    TIMER timer_;
+    std::shared_ptr<rclcpp::Node> node_odom_nav;
+    bool check_odom;
+    float_t req_pos_y;
 };

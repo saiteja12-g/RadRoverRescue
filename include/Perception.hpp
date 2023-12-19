@@ -49,12 +49,11 @@ class Perception : public rclcpp::Node {
   bool detect_obj();
   // Method to detect objects - returns true if successful
 
-  bool select_obj();
-  // Method to select an object based on some criteria - returns true if
-  // successful
+  bool move_to_obj();
 
-  void move_to_obj();
-  // Method to initiate movement towards the selected object
+  void img_callback(const sensor_msgs::msg::Image::ConstSharedPtr& msg);
+
+  void odom_callback_search(const ODOM::SharedPtr msg);
 
  private:
   cv::Mat img_feed;
@@ -62,4 +61,20 @@ class Perception : public rclcpp::Node {
 
   sensor_msgs::msg::LaserScan lidar_feed;
   // Laser scan data, typically from a LiDAR sensor
+
+  rclcpp::NodeOptions options;
+  image_transport::Subscriber sub;
+  rclcpp::Node::SharedPtr img_node;
+  rclcpp::Publisher<TWIST>::SharedPtr pub_vel;
+  rclcpp::Node::SharedPtr percep_odom_node;
+  rclcpp::Subscription<ODOM>::SharedPtr odom_sub;
+  bool r_rotate_flag;
+  bool l_rotate_flag;
+  bool move_forward;
+  bool stop_flag;
+  bool next_location;
+  double present_yaw;
+  double initial_yaw;
+
+
 };

@@ -21,6 +21,7 @@
 // Definition of the RRR class
 class RRR {
  public:
+ 
   RRR();
   // Constructor for the RRR class
 
