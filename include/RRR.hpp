@@ -20,28 +20,28 @@
 
 /**
  * @brief Definition of the RRR class
- * 
+ *
  */
 class RRR {
  public:
   /**
    * @brief Construct a new RRR object
-   * 
+   *
    */
   RRR();
   /**
    * @brief Navigation stack
-   * 
+   *
    */
   Navigation nav;
   /**
    * @brief Perception stack
-   * 
+   *
    */
   Perception perc;
   /**
    * @brief Manipulation stack
-   * 
+   *
    */
   Manipulation manip;
 };

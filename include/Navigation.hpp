@@ -34,64 +34,64 @@ using namespace std::chrono_literals;  // Allows using time literals like '10s'
 
 /**
  * @brief Definition of the Navigation class
- * 
+ *
  */
 class Navigation : public rclcpp::Node {
  public:
-   /**
-    * @brief Construct a new Navigation object
-    * 
-    */
-   Navigation();
-   /**
-    * @brief Searching for object
-    * 
-    * @return true 
-    * @return false 
-    */
-   bool search_obj();
+  /**
+   * @brief Construct a new Navigation object
+   *
+   */
+  Navigation();
+  /**
+   * @brief Searching for object
+   *
+   * @return true
+   * @return false
+   */
+  bool search_obj();
 
-   /**
-    * @brief move to disposal zone
-    * 
-    * @return true 
-    * @return false
-    */
-   bool move_to_disposal_zone(); 
+  /**
+   * @brief move to disposal zone
+   *
+   * @return true
+   * @return false
+   */
+  bool move_to_disposal_zone();
 
-   /**
-    * @brief Start searching again
-    * 
-    * @return true 
-    * @return false 
-    */
-   bool resume_search();
-   
-   /**
-    * @brief search for object
-    * 
-    * @param msg 
-    */
-   void search(const ODOM::SharedPtr msg);
+  /**
+   * @brief Start searching again
+   *
+   * @return true
+   * @return false
+   */
+  bool resume_search();
 
-   /**
-    * @brief Navigation callback function
-    * 
-    * @param msg 
-    */
-   void disposal(const ODOM::SharedPtr msg);
+  /**
+   * @brief search for object
+   *
+   * @param msg
+   */
+  void search(const ODOM::SharedPtr msg);
 
-   /**
-    * @brief Navigation resume callback function
-    * 
-    * @param msg 
-    */
-   void resume(const ODOM::SharedPtr msg);
+  /**
+   * @brief Navigation callback function
+   *
+   * @param msg
+   */
+  void disposal(const ODOM::SharedPtr msg);
+
+  /**
+   * @brief Navigation resume callback function
+   *
+   * @param msg
+   */
+  void resume(const ODOM::SharedPtr msg);
 
  private:
-    PUBLISHER nav_publisher_;
-    TIMER timer_;
-    std::shared_ptr<rclcpp::Node> node_odom_nav;
-    bool check_odom;
-    float_t req_pos_y;
+  PUBLISHER nav_publisher_;
+  TIMER timer_;
+  std::shared_ptr<rclcpp::Node> node_odom_nav;
+  bool check_odom;
+  float_t req_pos_y;
 };

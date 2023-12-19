@@ -42,43 +42,43 @@ using ODOM = nav_msgs::msg::Odometry;
 
 /**
  * @brief Definition of the Perception class
- * 
+ *
  */
 class Perception : public rclcpp::Node {
  public:
- /**
-  * @brief Construct a new Perception object
-  * 
-  */
+  /**
+   * @brief Construct a new Perception object
+   *
+   */
   Perception();
   // Constructor for the class
   /**
    * @brief Method to detect objects
-   * 
-   * @return true 
-   * @return false 
+   *
+   * @return true
+   * @return false
    */
   bool detect_obj();
 
   /**
    * @brief move to object
-   * 
-   * @return true 
-   * @return false 
+   *
+   * @return true
+   * @return false
    */
   bool move_to_obj();
 
   /**
    * @brief img callback function
-   * 
-   * @param msg 
+   *
+   * @param msg
    */
   void img_callback(const sensor_msgs::msg::Image::ConstSharedPtr& msg);
 
   /**
    * @brief odom callback function
-   * 
-   * @param msg 
+   *
+   * @param msg
    */
   void odom_callback_search(const ODOM::SharedPtr msg);
 
@@ -102,6 +102,4 @@ class Perception : public rclcpp::Node {
   bool next_location;
   double present_yaw;
   double initial_yaw;
-
-
 };

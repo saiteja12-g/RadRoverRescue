@@ -1,4 +1,13 @@
-Done processing ./test/main.cpp
-Done processing ./test/manipulation_test.cpp
-Done processing ./test/navigation_test.cpp
-Done processing ./test/perception_test.cpp
+Done processing src/RadRoverRescue/src/Manipulation.cpp
+Done processing src/RadRoverRescue/src/Navigation.cpp
+Done processing src/RadRoverRescue/src/Perception.cpp
+Done processing src/RadRoverRescue/src/main.cpp
+Done processing src/RadRoverRescue/src/rrr.cpp
+Done processing src/RadRoverRescue/include/Manipulation.hpp
+Done processing src/RadRoverRescue/include/Navigation.hpp
+Done processing src/RadRoverRescue/include/Perception.hpp
+Done processing src/RadRoverRescue/include/RRR.hpp
+Done processing src/RadRoverRescue/test/main.cpp
+Done processing src/RadRoverRescue/test/manipulation_test.cpp
+Done processing src/RadRoverRescue/test/navigation_test.cpp
+Done processing src/RadRoverRescue/test/perception_test.cpp

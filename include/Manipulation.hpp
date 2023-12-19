@@ -39,37 +39,36 @@ using std::placeholders::_1;  // For use in std::bind, to refer to the first
 
 /**
  * @brief Defination of the Manipulation class
- * 
+ *
  */
 class Manipulation : public rclcpp::Node {
  public:
-   /**
-    * @brief Construct a new Manipulation object
-    * 
-    */
-   Manipulation();
+  /**
+   * @brief Construct a new Manipulation object
+   *
+   */
+  Manipulation();
 
-   /**
-    * @brief Pick the object
-    * 
-    * @return true 
-    * @return false 
-    */
-   bool pick_obj();
+  /**
+   * @brief Pick the object
+   *
+   * @return true
+   * @return false
+   */
+  bool pick_obj();
 
-   /**
-    * @brief Place the object
-    * 
-    * @return true 
-    * @return false 
-    */
-   bool place_obj();
-
+  /**
+   * @brief Place the object
+   *
+   * @return true
+   * @return false
+   */
+  bool place_obj();
 
  private:
-    geometry_msgs::msg::Pose m_place_pose;
-    geometry_msgs::msg::Pose pick_pose;
-    CLIENT_DELETE pick_client;
-    CLIENT_SPAWN place_client;
-    rclcpp::Node::SharedPtr manip_node;
+  geometry_msgs::msg::Pose m_place_pose;
+  geometry_msgs::msg::Pose pick_pose;
+  CLIENT_DELETE pick_client;
+  CLIENT_SPAWN place_client;
+  rclcpp::Node::SharedPtr manip_node;
 };
