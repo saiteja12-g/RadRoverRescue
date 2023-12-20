@@ -20,7 +20,7 @@ ROS_PACKAGE_NAME=$(basename $PROG_DIR)
 echo "ROS_PACKAGE_NAME = $ROS_PACKAGE_NAME"
 
 # 2.) Generat report info
-BUILD_DIR=$EXEC_DIR/build/$ROS_PACKAGE_NAME/
+BUILD_DIR=$EXEC_DIR/build/$ROS_PACKAGE_NAME
 echo "BUILD_DIR = $BUILD_DIR"
 rm -f $BUILD_DIR/coverage.info
 lcov --capture --directory $BUILD_DIR --output-file $BUILD_DIR/coverage.info
