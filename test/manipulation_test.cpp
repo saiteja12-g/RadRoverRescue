@@ -11,7 +11,17 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+/**
+ * @file manipulation_test.cpp
+ * @author Sai Teja Gilukara (Navigator)
+ * @author Akash Parmar (Driver)
+ * @brief 
+ * @version 0.1
+ * @date 2023-12-19
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
 
 #include <gtest/gtest.h>
 #include <stdlib.h>
@@ -22,7 +32,10 @@
 #include "../include/Manipulation.hpp"
 #include "std_msgs/msg/string.hpp"
 #include "std_msgs/msg/string.hpp"
-
+/**
+ * @brief pick place test
+ * 
+ */
 class TaskManipulation : public testing::Test {
  public:
   geometry_msgs::msg::Pose m_place_pose;
@@ -31,7 +44,10 @@ class TaskManipulation : public testing::Test {
   rclcpp::Node::SharedPtr manip_node;
   rclcpp::Node::SharedPtr node_;
 };
-
+/**
+ * @brief Construct a new test f object
+ * 
+ */
 TEST_F(TaskManipulation, test_pick_bin) {
   node_ = rclcpp::Node::make_shared("test_manipulation");
   m_place_pose.position.x = 3.5;
@@ -48,7 +64,10 @@ TEST_F(TaskManipulation, test_pick_bin) {
   // EXPECT_EQ(1, static_cast<int>(num_pub));
   EXPECT_EQ(1,1);
 }
-
+/**
+ * @brief Construct a new test f object
+ * 
+ */
 TEST_F(TaskManipulation, test_place_bin) {
   node_ = rclcpp::Node::make_shared("test_manipulation");
   m_place_pose.position.x = 3.5;

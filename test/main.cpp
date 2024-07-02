@@ -11,11 +11,27 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+/**
+ * @file main.cpp
+ * @author Sai Teja Gilukara (Navigator)
+ * @author Akash Parmar (Driver)
+ * @brief 
+ * @version 0.1
+ * @date 2023-12-19
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
 #include <gtest/gtest.h>
 
 #include <rclcpp/rclcpp.hpp>
-
+/**
+ * @brief main function
+ * 
+ * @param argc 
+ * @param argv 
+ * @return int 
+ */
 int main(int argc, char** argv) {
   rclcpp::init(argc, argv);
   ::testing::InitGoogleTest(&argc, argv);

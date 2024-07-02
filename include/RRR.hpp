@@ -18,18 +18,30 @@
 #include "./Navigation.hpp"
 #include "./Perception.hpp"
 
-// Definition of the RRR class
+/**
+ * @brief Definition of the RRR class
+ *
+ */
 class RRR {
  public:
+  /**
+   * @brief Construct a new RRR object
+   *
+   */
   RRR();
-  // Constructor for the RRR class
-
+  /**
+   * @brief Navigation stack
+   *
+   */
   Navigation nav;
-  // Member variable of type Navigation for navigation-related tasks
-
+  /**
+   * @brief Perception stack
+   *
+   */
   Perception perc;
-  // Member variable of type Perception for perception-related tasks
-
+  /**
+   * @brief Manipulation stack
+   *
+   */
   Manipulation manip;
-  // Member variable of type Manipulation for manipulation-related tasks
 };

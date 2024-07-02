@@ -97,7 +97,7 @@ if(BUILD_TESTING)
   test/navigation_test.cpp
   test/perception_test.cpp
 )
-  ament_add_gtest(test_${PROJECT_NAME} ${TESTFILES} include/Manipulation.hpp include/Navigation.hpp include/Perception.hpp)
+  ament_add_gtest(test_${PROJECT_NAME} ${TESTFILES} include/Manipulation.hpp include/Navigation.hpp include/Perception.hpp include/RRR.hpp)
   target_include_directories(test_${PROJECT_NAME} PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
@@ -107,8 +107,14 @@ if(BUILD_TESTING)
     test_${PROJECT_NAME}
     DESTINATION lib/${PROJECT_NAME}  
   )
-  target_include_directories(test_${PROJECT_NAME} PUBLIC ../include/RadRoverRescue)
+  target_include_directories(test_${PROJECT_NAME} PUBLIC ../include)
 endif()
+
+add_executable(my_main src/main.cpp src/Manipulation.cpp src/Navigation.cpp src/Perception.cpp src/rrr.cpp)
+ament_target_dependencies(my_main rclcpp rclcpp_action std_msgs geometry_msgs sensor_msgs image_transport cv_bridge OpenCV nav_msgs gazebo_msgs tf2 tf2_ros)
+include_directories(
+    ${CMAKE_SOURCE_DIR}/include
+)
 
 ###################################################
 # Create the compilation database for clangd and move it out of the build dir.
@@ -161,6 +167,19 @@ doxygen_add_docs(docs           # target name
 ###################################
 # add_subdirectory(test)
 
+install(TARGETS
+  my_main
+  # test_odom
+  # test_img
+  DESTINATION lib/${PROJECT_NAME})
+
+install(DIRECTORY 
+  launch
+  worlds
+  models
+  maps
+  DESTINATION share/${PROJECT_NAME}
+)
 install(PROGRAMS      # want to make the file executable (ie. chmod a+x)
   scripts/run_me_for_fun.bash
   scripts/generate_coverage_report.bash

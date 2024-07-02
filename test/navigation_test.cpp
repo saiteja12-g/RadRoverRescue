@@ -12,7 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
+/**
+ * @file navigation_test.cpp
+ * @author Sai Teja Gilukara (Navigator)
+ * @author Akash Parmar (Driver)
+ * @brief Navigation tests
+ * @version 0.1
+ * @date 2023-12-19
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
 #include <gtest/gtest.h>
 #include <stdlib.h>
 
@@ -26,7 +36,10 @@
 #include "../include/Navigation.hpp"
 
 using ODOM = nav_msgs::msg::Odometry;
-
+/**
+ * @brief Task Navigation test
+ * 
+ */
 class TaskNavigation : public testing::Test {
  public:
   rclcpp::Node::SharedPtr node_;
@@ -35,11 +48,18 @@ class TaskNavigation : public testing::Test {
   void callback();
   PUBLISHER nav_publisher_;
 };
+/**
+ * @brief task navigation callback
+ * 
+ */
 void TaskNavigation::callback() {
   auto message = ODOM();
   test_pub->publish(message);
 }
-
+/**
+ * @brief Construct a new test f object
+ * 
+ */
 TEST_F(TaskNavigation, test_search_bins) {
   node_ = rclcpp::Node::make_shared("test_navigation");
   auto ypos = 3.0;
@@ -58,7 +78,10 @@ TEST_F(TaskNavigation, test_search_bins) {
   rpyGoal.pose.orientation.w = 1;
   ASSERT_TRUE(true);
 }
-
+/**
+ * @brief Construct a new test f object
+ * 
+ */
 TEST_F(TaskNavigation, test_resume_search) {
   node_ = rclcpp::Node::make_shared("test_navigation");
   TIMER timer = node_->create_wall_timer(
@@ -76,7 +99,10 @@ TEST_F(TaskNavigation, test_resume_search) {
   rpyGoal.pose.orientation.w = 1;
   ASSERT_TRUE(true);
 }
-
+/**
+ * @brief Construct a new test f object
+ * 
+ */
 TEST_F(TaskNavigation, test_move_to_disposal) {
   node_ = rclcpp::Node::make_shared("test_navigation");
   rclcpp::spin_some(node_);
